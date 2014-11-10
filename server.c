@@ -35,30 +35,27 @@ void run() {
 }
 
 int main(int argc, const char * argv[]) {
-    int port  = 799;
     char data[BUFFER_LEN] = {0};
-    char path_buffer[BUFFER_LEN] = {0};
-
-    zkServer zkserver("test");
-    zkserver.zkLoadConf("conf/zk.conf");
-    zkserver.set_host("127.0.0.1:2181");
-    zkserver.zkInit();
-
     int pid = getpid();
-    sprintf(data, "%s:%d:%d", inet_ntoa(get_local_ip()), port, pid); 
+    sprintf(data, "data:%s:%d:%d", inet_ntoa(get_local_ip()), 19999); 
 
-    zkserver.zkCreate( data, path_buffer, BUFFER_LEN);
-    if(zkserver.is_leader())
+    zkServer zks;
+    zks.zkLoadConf("/data/coc/conf/zk.conf");
+    zks.zkInit();
+
+    char path_buffer[BUFFER_LEN] = {0};
+    zks.zkCreate( data, path_buffer, BUFFER_LEN);
+    if(zks.isLeader())
     {
-        printf("I'm master!\n");
+        printf("I'm master! path_buffer %s \n", path_buffer);
     }
     else
     {
-        printf("I'm slave!\n");
+        printf("I'm slave! path_buffer %s \n", path_buffer);
     }
-    zkserver.watchChildren();
+    zks.watchChildren();
 
-    int total = 200;
+    int total = 2000;
     printf("Server is running...");
     while (total-- > 0) {
         run();
@@ -66,7 +63,5 @@ int main(int argc, const char * argv[]) {
     }
 
     getchar();
-
-
     return 0;
 }

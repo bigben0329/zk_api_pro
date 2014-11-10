@@ -21,10 +21,10 @@
 
 void clients_watcher_g(zhandle_t * zh, int type, int state, const char* path, void* watcherCtx);
 void election_watcher(zhandle_t * zh, int type, int state,const char* path, void* watcherCtx);
-
+typedef void (*master_value_change_fun)(std::string);
 typedef struct _watch_func_para_t {
         zhandle_t *zkhandle;
-            char node[PATH_BUFFER_LEN];
+        char node[PATH_BUFFER_LEN];
 } watch_func_para_t; 
 
 
@@ -42,21 +42,31 @@ class zkClient{
         ~zkClient();
 
         void zkInit();
-        void zkLoadConf(const char * filename);
+        int zkLoadConf(const char * filename);
         void zkGetLeader( std::string path, struct String_vector strings );
 
-        std::string getMasterStr(){return masterStr;}
+        std::string getMasterValue(){return master_value;}
+	char* getErrorMsg(){ return error_msg; }
+
+    public:
+        master_value_change_fun func_master_value_onchange;
 
     private:
 
     private:
+        //handle
         zhandle_t * zkhandle;
 
-        std::map<std::string, std::string> config;
-        std::string zkHost;     //config
-        int Timeout;
+        //zookeeper
+        std::string master_value;
 
-        std::string masterStr;
+        //config
+        std::string host; 
+        std::string root; 
+        int timeout;
+
+        std::map<std::string, std::string> config;
+        char error_msg[1024];
 };
 
 #endif

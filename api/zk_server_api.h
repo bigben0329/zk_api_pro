@@ -23,22 +23,27 @@ class zkServer{
         int zkInit();
         int zkCreate( const char *value, char *path_buffer, int path_buffer_len);
         int watchChildren();
-        int is_leader();
-        void zkLoadConf(const char*);
+        int isLeader();
+        int zkLoadConf(const char*);
 
-        void set_name(const std::string name);
-        void set_host(const std::string host);
+        void setName(const std::string name);
+        void setHost(const std::string host);
+	char* getErrorMsg(){ return error_msg; }
+
     private:
-        std::string serName;
+        //load config attr
+        std::string server_name;
+        std::string host;
+        std::string prefix;
+        std::string root;
+        int timeout;  
 
-        std::string zkHost;
-        std::string zkNodePath;
-        std::string zkRootPath;
-
-        std::string zkNode;
+        //zookeeper value
+        std::string node_name;
         zhandle_t * zkhandle;
-        int Timeout;  
+
         std::map<std::string, std::string> config;
+	char error_msg[1024];
 };
 
 #endif

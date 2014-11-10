@@ -11,11 +11,13 @@ AF_INET6	include/zookeeper/winconfig.h	169;"	d
 AR	Makefile	/^AR := ar$/;"	m
 AR	api/Makefile	/^AR := ar$/;"	m
 AuthPacket	include/generated/zookeeper.jute.h	/^struct AuthPacket {$/;"	s
-BUFFER_LEN	server.c	16;"	d	file:
+BUFFER_LEN	server.c	15;"	d	file:
 C	Makefile	/^C :=gcc                                                                                                                             $/;"	m
 C	api/Makefile	/^C := gcc$/;"	m
 CXX	Makefile	/^CXX := g++$/;"	m
 CXX	api/Makefile	/^CXX := g++$/;"	m
+CXX_FLAGS	api/Makefile	/^CXX_FLAGS := $(C_FLAGS)$/;"	m
+CXX_RELEASE_FLAGS	api/Makefile	/^CXX_RELEASE_FLAGS := $(CXX_FLAGS)$/;"	m
 C_FLAGS	Makefile	/^C_FLAGS := -DTHREADED$/;"	m
 C_FLAGS	Makefile	/^C_FLAGS := -g -ansi -pipe -lpthread$/;"	m
 C_FLAGS	api/Makefile	/^C_FLAGS := -DTHREADED$/;"	m
@@ -126,7 +128,6 @@ INT_LEAST8_MIN	include/zookeeper/winstdint.h	146;"	d
 Id	include/generated/zookeeper.jute.h	/^struct Id {$/;"	s
 Id_vector	include/generated/zookeeper.jute.h	/^struct Id_vector {$/;"	s
 LIB	Makefile	/^LIB = \\$/;"	m
-LIB	Makefile	/^LIB = libs\/lib64\/libzookeeper_mt.a libs\/lib64\/libzkapi.a$/;"	m
 LOGSTREAM	include/zookeeper/zookeeper_log.h	29;"	d
 LOG_DEBUG	include/zookeeper/zookeeper_log.h	37;"	d
 LOG_ERROR	include/zookeeper/zookeeper_log.h	31;"	d
@@ -147,7 +148,7 @@ PACKAGE_TARNAME	include/zookeeper/winconfig.h	123;"	d
 PACKAGE_URL	include/zookeeper/winconfig.h	126;"	d
 PACKAGE_VERSION	include/zookeeper/winconfig.h	129;"	d
 PATH_BUFFER_LEN	api/zk_client_api.h	20;"	d
-PATH_BUFFER_LEN	api/zk_server_api.cpp	3;"	d	file:
+PATH_BUFFER_LEN	api/zk_server_api.cpp	4;"	d	file:
 PATH_BUFFER_LEN	include/zk.h	19;"	d
 POLL_NFDS_TYPE	include/zookeeper/winconfig.h	132;"	d
 PROTO_H_	include/zookeeper/proto.h	19;"	d
@@ -168,6 +169,7 @@ SIZE_MAX	include/zookeeper/winstdint.h	204;"	d
 SIZE_MAX	include/zookeeper/winstdint.h	206;"	d
 SOURCES	Makefile	/^SOURCES = $(wildcard *.c)$/;"	m
 SOURCES	api/Makefile	/^SOURCES = $(wildcard *.cpp)$/;"	m
+SO_FLAGS	api/Makefile	/^SO_FLAGS := -z defs -fPIC -shared -ldl $/;"	m
 STDC_HEADERS	include/zookeeper/winconfig.h	135;"	d
 STRUCT_INITIALIZER	include/zookeeper/recordio.h	23;"	d
 STRUCT_INITIALIZER	include/zookeeper/recordio.h	25;"	d
@@ -190,7 +192,7 @@ SyncRequest	include/generated/zookeeper.jute.h	/^struct SyncRequest {$/;"	s
 SyncResponse	include/generated/zookeeper.jute.h	/^struct SyncResponse {$/;"	s
 TIME_WITH_SYS_TIME	include/zookeeper/winconfig.h	138;"	d
 Timeout	api/zk_client_api.h	/^        int Timeout;$/;"	m	class:zkClient
-Timeout	api/zk_server_api.h	/^    int Timeout;  $/;"	m	class:zkServer
+Timeout	api/zk_server_api.h	/^        int Timeout;  $/;"	m	class:zkServer
 Txn	include/generated/zookeeper.jute.h	/^struct Txn {$/;"	s
 TxnHeader	include/generated/zookeeper.jute.h	/^struct TxnHeader {$/;"	s
 Txn_vector	include/generated/zookeeper.jute.h	/^struct Txn_vector {$/;"	s
@@ -324,6 +326,7 @@ client_id	include/zookeeper/zookeeper.h	/^    int64_t client_id;$/;"	m	struct:__
 clientid_t	include/zookeeper/zookeeper.h	/^} clientid_t;$/;"	t	typeref:struct:__anon2
 clients_watcher_g	api/zk_client_api.cpp	/^void clients_watcher_g(zhandle_t * zh, int type, int state, const char* path, void* watcherCtx) {$/;"	f
 config	api/zk_client_api.h	/^        std::map<std::string, std::string> config;$/;"	m	class:zkClient
+config	api/zk_server_api.h	/^        std::map<std::string, std::string> config;$/;"	m	class:zkServer
 count	include/generated/zookeeper.jute.h	/^    int32_t count;$/;"	m	struct:ACL_vector
 count	include/generated/zookeeper.jute.h	/^    int32_t count;$/;"	m	struct:Id_vector
 count	include/generated/zookeeper.jute.h	/^    int32_t count;$/;"	m	struct:String_vector
@@ -503,9 +506,11 @@ err	include/zookeeper/zookeeper.h	/^    int err;$/;"	m	struct:zoo_op_result
 existWatches	include/generated/zookeeper.jute.h	/^    struct String_vector existWatches;$/;"	m	struct:SetWatches	typeref:struct:SetWatches::String_vector
 flags	include/generated/zookeeper.jute.h	/^    int32_t flags;$/;"	m	struct:CreateRequest
 flags	include/zookeeper/zookeeper.h	/^            int flags;$/;"	m	struct:zoo_op::__anon3::__anon4
+func_master_value_onchange	api/zk_client_api.h	/^        master_value_change_fun func_master_value_onchange;$/;"	m	class:zkClient
+getMasterStr	api/zk_client_api.h	/^        std::string getMasterStr(){return masterStr;}$/;"	f	class:zkClient
 get_errno	include/zookeeper/winconfig.h	177;"	d
-get_local_ip	include/util.h	/^static struct in_addr get_local_ip() {                                                                                                  $/;"	f
-get_node_name	api/zk_server_api.cpp	/^static void get_node_name(const char *buf, char *node) {                                                                                $/;"	f	file:
+get_local_ip	server.c	/^static struct in_addr get_local_ip() {                                                                                                  $/;"	f	file:
+get_node_name	api/zk_server_api.cpp	/^static void get_node_name(const char *buf, char *node) { $/;"	f	file:
 hostip	api/zk_client_api.h	/^    char * hostip;$/;"	m	struct:_name_service_t
 hostport	api/zk_client_api.h	/^    int hostport;$/;"	m	struct:_name_service_t
 iarchive	include/zookeeper/recordio.h	/^struct iarchive {$/;"	s
@@ -537,6 +542,8 @@ localtime_r	include/zookeeper/winconfig.h	176;"	d
 magic	include/generated/zookeeper.jute.h	/^    int32_t magic;$/;"	m	struct:FileHeader
 main	client.c	/^int main(int argc, const char * argv[]) {$/;"	f
 main	server.c	/^int main(int argc, const char * argv[]) {$/;"	f
+masterStr	api/zk_client_api.h	/^        std::string masterStr;$/;"	m	class:zkClient
+master_value_change_fun	api/zk_client_api.h	/^typedef void (*master_value_change_fun)(std::string);$/;"	t
 max	include/generated/zookeeper.jute.h	/^    int32_t max;$/;"	m	struct:GetMaxChildrenResponse
 max	include/generated/zookeeper.jute.h	/^    int32_t max;$/;"	m	struct:SetMaxChildrenRequest
 max	include/generated/zookeeper.jute.h	/^    int32_t max;$/;"	m	struct:SetMaxChildrenTxn
@@ -550,10 +557,11 @@ mzxid	include/generated/zookeeper.jute.h	/^    int64_t mzxid;$/;"	m	struct:StatP
 mzxid	include/generated/zookeeper.jute.h	/^    int64_t mzxid;$/;"	m	struct:StatPersistedV1
 name	api/zk_client_api.h	/^    char name[16];$/;"	m	struct:_name_service_t
 name_service_t	api/zk_client_api.h	/^} name_service_t;$/;"	t	typeref:struct:_name_service_t
-node	api/zk_client_api.h	/^            char node[PATH_BUFFER_LEN];$/;"	m	struct:_watch_func_para_t
-node	api/zk_server_api.cpp	/^            char node[PATH_BUFFER_LEN];$/;"	m	struct:_watch_func_para_t	file:
+node	api/zk_client_api.h	/^        char node[PATH_BUFFER_LEN];$/;"	m	struct:_watch_func_para_t
+node	api/zk_server_api.cpp	/^        char node[PATH_BUFFER_LEN];$/;"	m	struct:_watch_func_para_t	file:
 numChildren	include/generated/zookeeper.jute.h	/^    int32_t numChildren;$/;"	m	struct:Stat
 oarchive	include/zookeeper/recordio.h	/^struct oarchive {$/;"	s
+onMasterStrChanged	api/zk_client_api.cpp	/^void onMasterStrChanged(std::string str)$/;"	f
 parentCVersion	include/generated/zookeeper.jute.h	/^    int32_t parentCVersion;$/;"	m	struct:CreateTxn
 passwd	include/generated/zookeeper.jute.h	/^    struct buffer passwd;$/;"	m	struct:ConnectRequest	typeref:struct:ConnectRequest::buffer
 passwd	include/generated/zookeeper.jute.h	/^    struct buffer passwd;$/;"	m	struct:ConnectResponse	typeref:struct:ConnectResponse::buffer
@@ -601,7 +609,7 @@ run	client.c	/^void run() {$/;"	f
 run	server.c	/^void run() {$/;"	f
 scheme	include/generated/zookeeper.jute.h	/^    char * scheme;$/;"	m	struct:AuthPacket
 scheme	include/generated/zookeeper.jute.h	/^    char * scheme;$/;"	m	struct:Id
-serName	api/zk_server_api.h	/^    std::string serName;$/;"	m	class:zkServer
+serName	api/zk_server_api.h	/^        std::string serName;$/;"	m	class:zkServer
 serialize_ACL	include/generated/zookeeper.jute.c	/^int serialize_ACL(struct oarchive *out, const char *tag, struct ACL *v){$/;"	f
 serialize_ACL_vector	include/generated/zookeeper.jute.c	/^int serialize_ACL_vector(struct oarchive *out, const char *tag, struct ACL_vector *v)$/;"	f
 serialize_AuthPacket	include/generated/zookeeper.jute.c	/^int serialize_AuthPacket(struct oarchive *out, const char *tag, struct AuthPacket *v){$/;"	f
@@ -694,7 +702,6 @@ string_completion_t	include/zookeeper/zookeeper.h	/^        (*string_completion_
 strings_completion_t	include/zookeeper/zookeeper.h	/^typedef void (*strings_completion_t)(int rc,$/;"	t
 strings_stat_completion_t	include/zookeeper/zookeeper.h	/^typedef void (*strings_stat_completion_t)(int rc,$/;"	t
 strtok_r	include/zookeeper/winconfig.h	175;"	d
-svr_ip	api/zk_client_api.cpp	/^char svr_ip[PATH_BUFFER_LEN] = {0};$/;"	v
 time	include/generated/zookeeper.jute.h	/^    int64_t time;$/;"	m	struct:TxnHeader
 timeOut	include/generated/zookeeper.jute.h	/^    int32_t timeOut;$/;"	m	struct:ConnectRequest
 timeOut	include/generated/zookeeper.jute.h	/^    int32_t timeOut;$/;"	m	struct:ConnectResponse
@@ -762,22 +769,22 @@ zkClient	api/zk_client_api.cpp	/^zkClient::zkClient()$/;"	f	class:zkClient
 zkClient	api/zk_client_api.h	/^class zkClient{$/;"	c
 zkCreate	api/zk_server_api.cpp	/^int zkServer::zkCreate(const char *data, char *path_buffer, int path_buffer_len)$/;"	f	class:zkServer
 zkGetLeader	api/zk_client_api.cpp	/^void zkClient::zkGetLeader(std::string path, struct String_vector strings ) {$/;"	f	class:zkClient
-zkHost	api/zk_client_api.h	/^        std::string zkHost;$/;"	m	class:zkClient
-zkHost	api/zk_server_api.h	/^    std::string zkHost;$/;"	m	class:zkServer
+zkHost	api/zk_client_api.h	/^        std::string zkHost;     \/\/config$/;"	m	class:zkClient
+zkHost	api/zk_server_api.h	/^        std::string zkHost;$/;"	m	class:zkServer
 zkInit	api/zk_client_api.cpp	/^void zkClient::zkInit()$/;"	f	class:zkClient
 zkInit	api/zk_server_api.cpp	/^int zkServer::zkInit()$/;"	f	class:zkServer
 zkLoadConf	api/zk_client_api.cpp	/^void zkClient::zkLoadConf(const char * filename)$/;"	f	class:zkClient
-zkNode	api/zk_server_api.h	/^    std::string zkNode;$/;"	m	class:zkServer
-zkNodePath	api/zk_server_api.h	/^    std::string zkNodePath;$/;"	m	class:zkServer
-zkRootPath	api/zk_client_api.h	/^        std::string zkRootPath;$/;"	m	class:zkClient
-zkRootPath	api/zk_server_api.h	/^    std::string zkRootPath;$/;"	m	class:zkServer
+zkLoadConf	api/zk_server_api.cpp	/^void zkServer::zkLoadConf(const char * filename)$/;"	f	class:zkServer
+zkNode	api/zk_server_api.h	/^        std::string zkNode;$/;"	m	class:zkServer
+zkNodePath	api/zk_server_api.h	/^        std::string zkNodePath;$/;"	m	class:zkServer
+zkRootPath	api/zk_server_api.h	/^        std::string zkRootPath;$/;"	m	class:zkServer
 zkServer	api/zk_server_api.cpp	/^zkServer::zkServer()$/;"	f	class:zkServer
 zkServer	api/zk_server_api.cpp	/^zkServer::zkServer(std::string name):serName(name)$/;"	f	class:zkServer
 zkServer	api/zk_server_api.h	/^class zkServer{$/;"	c
 zkhandle	api/zk_client_api.h	/^        zhandle_t * zkhandle;$/;"	m	class:zkClient
 zkhandle	api/zk_client_api.h	/^        zhandle_t *zkhandle;$/;"	m	struct:_watch_func_para_t
 zkhandle	api/zk_server_api.cpp	/^        zhandle_t *zkhandle;$/;"	m	struct:_watch_func_para_t	file:
-zkhandle	api/zk_server_api.h	/^    zhandle_t * zkhandle;$/;"	m	class:zkServer
+zkhandle	api/zk_server_api.h	/^        zhandle_t * zkhandle;$/;"	m	class:zkServer
 zkhost	include/zk.h	/^char * zkhost;$/;"	v
 zknode	api/zk_client_api.h	/^    char zknode[PATH_BUFFER_LEN];$/;"	m	struct:_name_service_t
 zoo_op	include/zookeeper/zookeeper.h	/^typedef struct zoo_op {$/;"	s
